@@ -1,0 +1,23 @@
+.description {
+  margin-top: 1%;
+  border-top: solid 1px;
+  padding-top: 1%;
+}
+
+.media1 {
+  height: 70vh;
+  width: 100%;
+}
+
+.root {
+  max-width: 550px;
+}
+
+@media (max-width: 400px) {
+  .root {
+    max-width: 100%;
+  }
+  .media1 {
+    height: 40vh;
+  }
+}
