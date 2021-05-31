@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +25,22 @@ export default function Back() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <IconButton
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="menu"
             >
-              <KeyboardBackspaceIcon fontSize="large" color="error" />
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                className={classes.button}
+                startIcon={<KeyboardBackspaceIcon />}
+              >
+                Back
+              </Button>
             </IconButton>
           </Link>
         </Toolbar>

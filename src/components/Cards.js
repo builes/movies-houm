@@ -9,6 +9,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({
   root: {
@@ -60,9 +63,12 @@ export default function Cards({
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="large" color="primary">
-              Share
-            </Button>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon color="inherit" />
+            </IconButton>
+            <IconButton aria-label="share">
+              <ShareIcon color="inherit" />
+            </IconButton>
           </CardActions>
         </Card>
       </Link>

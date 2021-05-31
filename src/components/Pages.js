@@ -20,7 +20,12 @@ export default function Pages({ handlePage, pages }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Pagination count={pages} onClick={handleClick} />
+      <Pagination
+        count={pages}
+        onClick={handleClick}
+        size="large"
+        defaultPage={1}
+      />
     </div>
   );
 }

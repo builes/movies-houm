@@ -28,25 +28,12 @@ export default function GetMovies() {
 
   const searchMovie = (text) => {
     setSearch(text);
-    console.log(text);
+    setPage("&page=1");
+    console.log("object");
   };
 
   useEffect(() => {
-    async function getMovies() {
-      try {
-        const res = await axios.get(baseUrl + initialApi + apiKey + page);
-        //console.log(res.data.results[0]);
-        setMovies(res.data.results);
-        setTotalPages(res.data.total_pages);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getMovies();
-  }, [page]);
-
-  useEffect(() => {
-    if (search.length >= 2) {
+    if (search.length >= 1) {
       async function getMovies() {
         try {
           const res = await axios.get(urlSearch);
@@ -58,8 +45,20 @@ export default function GetMovies() {
       }
       getMovies();
       //console.log(movies);
+    } else {
+      async function getMovies() {
+        try {
+          const res = await axios.get(baseUrl + initialApi + apiKey + page);
+          //console.log(res.data.results[0]);
+          setMovies(res.data.results);
+          setTotalPages(res.data.total_pages);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      getMovies();
     }
-  }, [search]);
+  }, [search, page]);
 
   return (
     <>

@@ -24,10 +24,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     "& > * + *": {},
   },
-  div: {
-    display: "flex",
-    alignItems: "flex-end",
-  },
   root: {
     marginTop: 15,
   },
@@ -35,22 +31,29 @@ const useStyles = makeStyles({
 
 export default function Movie() {
   const [movie, setMovie] = useState({});
+  const [keyTrailer, setkeyTrailer] = useState("");
   const { id, average } = useParams();
 
   const classes = useStyles();
 
+  //Datos para api de la pelicula
   const baseUrl = "https://api.themoviedb.org/3/movie/";
   const apiKey = "?api_key=69411c96b258f360f365f6cd31778c19";
   const baseUrlImage = "https://image.tmdb.org/t/p/w500";
   const poster = movie.poster_path;
   const url = baseUrl + id + apiKey;
 
+  //Datos para api Trailer
+  let urlTrailer = baseUrl + id + "/videos" + apiKey + "&language=en-US";
+
   useEffect(() => {
     async function getMovie() {
       try {
-        const res = await axios.get(baseUrl + id + apiKey);
-        console.log(res.data);
+        const res = await axios.get(url);
+        const resTrailer = await axios.get(urlTrailer);
+        console.log(resTrailer.data.results[0].key);
         setMovie(res.data);
+        setkeyTrailer(resTrailer.data.results[0].key);
       } catch (error) {
         console.error(error);
       }
@@ -78,21 +81,23 @@ export default function Movie() {
                 <Typography variant="body2" color="textSecondary" component="p">
                   {movie.overview}
                 </Typography>
-                <Typography
-                  className="description"
-                  variant="body2"
-                  color="textSecondary"
-                  component="p"
+
+                <div
+                  className={classes.stars}
+                  style={{
+                    borderTop: "solid 1px #ff452b",
+                    marginTop: "2%",
+                    paddingTop: "2%",
+                  }}
                 >
-                  <div className={classes.stars}>
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={average}
-                      precision={0.5}
-                      readOnly
-                    />
-                  </div>
-                </Typography>
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={Number(average)}
+                    precision={0.5}
+                    readOnly
+                  />
+                </div>
+
                 <Typography
                   className="description"
                   variant="body2"
@@ -110,7 +115,13 @@ export default function Movie() {
                 variant="contained"
                 size="large"
               >
-                <a>Trailer</a>
+                <a
+                  href={`https://www.youtube.com/watch?v=${keyTrailer}`}
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "#FF452B" }}
+                >
+                  Trailer
+                </a>
               </Button>
             </CardActions>
           </Card>

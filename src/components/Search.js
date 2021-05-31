@@ -60,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
         width: "20ch",
       },
     },
+    border: "solid #FF452B 1px",
+    borderRadius: "15px",
   },
 }));
 
@@ -75,7 +77,12 @@ export default function SearchAppBar({ searchMovie }) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            noWrap
+            color="secondary"
+          >
             Movies Houm
           </Typography>
           <div className={classes.search}>
