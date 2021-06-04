@@ -13,21 +13,20 @@ import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import "../styles/movie.css";
 import Back from "./Back";
+import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles({
-  media: {
-    height: "70vh",
-    width: "100%",
-  },
+const useStyles = makeStyles((theme) => ({
   stars: {
     display: "flex",
     flexDirection: "column",
     "& > * + *": {},
   },
-  root: {
-    marginTop: 15,
+  text: {
+    [theme.breakpoints.down("959")]: {
+      margin: `20px`,
+    },
   },
-});
+}));
 
 export default function Movie() {
   const [movie, setMovie] = useState({});
@@ -64,67 +63,52 @@ export default function Movie() {
   return (
     <>
       <Back />
-      <Grid container justify="center" className={classes.root}>
-        <Grid item>
-          <Card className="root">
-            <CardActionArea>
-              <CardMedia
-                className="media1"
-                image={baseUrlImage + poster}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {movie.title}
-                </Typography>
+      <Grid container justify="space-around" style={{ marginTop: "20px" }}>
+        <Grid item xs={6} md={4}>
+          <CardMedia
+            component="img"
+            width="100%"
+            image={baseUrlImage + poster}
+          />
+        </Grid>
+        <Grid item xs={12} md={7} className={classes.text}>
+          <Typography variant={"h4"}>{movie.title}</Typography>
+          <Divider style={{ marginTop: "7px", marginBottom: "7px" }} />
+          <Typography align="justify" variant={"body2"}>
+            <b>Sypnosis:</b>
+            {movie.overview}
+          </Typography>
+          <Divider style={{ marginTop: "7px", marginBottom: "7px" }} />
 
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {movie.overview}
-                </Typography>
+          <div
+            className={classes.stars}
+            style={{
+              paddingTop: "1%",
+              paddingBottom: "1%",
+            }}
+          >
+            <Rating
+              name="half-rating-read"
+              defaultValue={Number(average)}
+              precision={0.5}
+              readOnly
+            />
+          </div>
+          <Divider style={{ marginTop: "7px", marginBottom: "7px" }} />
+          <Typography align="justify" variant={"body2"}>
+            <b>Relaese:</b> {movie.release_date}
+          </Typography>
+          <Divider style={{ marginTop: "7px", marginBottom: "7px" }} />
 
-                <div
-                  className={classes.stars}
-                  style={{
-                    borderTop: "solid 1px #ff452b",
-                    marginTop: "2%",
-                    paddingTop: "2%",
-                  }}
-                >
-                  <Rating
-                    name="half-rating-read"
-                    defaultValue={Number(average)}
-                    precision={0.5}
-                    readOnly
-                  />
-                </div>
-
-                <Typography
-                  className="description"
-                  variant="body2"
-                  color="textSecondary"
-                  component="p"
-                >
-                  Release Date : {movie.release_date}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button
-                size="small"
-                color="primary"
-                variant="contained"
-                size="large"
-              >
-                <a
-                  href={`https://www.youtube.com/watch?v=${keyTrailer}`}
-                  target="_blank"
-                  style={{ textDecoration: "none", color: "#FF452B" }}
-                >
-                  Trailer
-                </a>
-              </Button>
-            </CardActions>
-          </Card>
+          <a
+            href={`https://www.youtube.com/watch?v=${keyTrailer}`}
+            target="_blank"
+            style={{ textDecoration: "none", color: "#FF452B" }}
+          >
+            <Button color="primary" size="large" variant="contained">
+              Trailer
+            </Button>
+          </a>
         </Grid>
       </Grid>
     </>

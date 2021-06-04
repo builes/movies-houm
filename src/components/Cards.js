@@ -40,38 +40,39 @@ export default function Cards({
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Link
-        to={"movie/" + id + "/" + average}
-        style={{ textDecoration: "none" }}
-      >
-        <Card className={classes.root}>
-          <CardActionArea>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <Link
+            to={"movie/" + id + "/" + average}
+            style={{ textDecoration: "none" }}
+          >
             <CardMedia
               className={classes.media}
               image={baseUrlImage + poster}
               title="Contemplative Reptile"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {title}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {overview.length > 120
-                  ? overview.slice(0, 100) + "..."
-                  : overview}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon color="inherit" />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon color="inherit" />
-            </IconButton>
-          </CardActions>
-        </Card>
-      </Link>
+          </Link>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {overview.length > 120
+                ? overview.slice(0, 100) + "..."
+                : overview}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+
+        <CardActions>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon color="inherit" />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon color="inherit" />
+          </IconButton>
+        </CardActions>
+      </Card>
     </Grid>
   );
 }
